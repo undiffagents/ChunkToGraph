@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key attr.name="value" attr.type="string" for="edge" id="d1"/>
+<key attr.name="value" attr.type="string" for="node" id="d0"/>
+<graph edgedefault="directed"><node id="A">
+  <data key="d0">A</data>
+</node>
+<node id="A_name">
+  <data key="d0">PVT</data>
+</node>
+<node id="A_role">
+  <data key="d0">task</data>
+</node>
+<node id="C">
+  <data key="d0">C</data>
+</node>
+<node id="C_name">
+  <data key="d0">Acknowledge</data>
+</node>
+<node id="C_role">
+  <data key="d0">button</data>
+</node>
+<node id="E">
+  <data key="d0">E</data>
+</node>
+<node id="E_name">
+  <data key="d0">nil</data>
+</node>
+<node id="E_role">
+  <data key="d0">box</data>
+</node>
+<node id="G">
+  <data key="d0">G</data>
+</node>
+<node id="G_name">
+  <data key="d0">nil</data>
+</node>
+<node id="G_role">
+  <data key="d0">target</data>
+</node>
+<node id="I">
+  <data key="d0">I</data>
+</node>
+<node id="I_name">
+  <data key="d0">nil</data>
+</node>
+<node id="I_role">
+  <data key="d0">letter</data>
+</node>
+<node id="L">
+  <data key="d0">L</data>
+</node>
+<node id="L_name">
+  <data key="d0">nil</data>
+</node>
+<node id="L_role">
+  <data key="d0">subject</data>
+</node>
+<edge id="0" source="A" target="A_name">
+  <data key="d1">has_name</data>
+</edge>
+<edge id="0" source="A" target="A_role">
+  <data key="d1">has_role</data>
+</edge>
+<edge id="0" source="C" target="C_name">
+  <data key="d1">has_name</data>
+</edge>
+<edge id="0" source="C" target="C_role">
+  <data key="d1">has_role</data>
+</edge>
+<edge id="0" source="C" target="A">
+  <data key="d1">has_parent</data>
+</edge>
+<edge id="0" source="E" target="E_name">
+  <data key="d1">has_name</data>
+</edge>
+<edge id="0" source="E" target="E_role">
+  <data key="d1">has_role</data>
+</edge>
+<edge id="0" source="E" target="A">
+  <data key="d1">has_parent</data>
+</edge>
+<edge id="0" source="G" target="G_name">
+  <data key="d1">has_name</data>
+</edge>
+<edge id="0" source="G" target="G_role">
+  <data key="d1">has_role</data>
+</edge>
+<edge id="0" source="G" target="A">
+  <data key="d1">has_parent</data>
+</edge>
+<edge id="0" source="G" target="I">
+  <data key="d1">isEquivalent</data>
+</edge>
+<edge id="0" source="I" target="I_name">
+  <data key="d1">has_name</data>
+</edge>
+<edge id="0" source="I" target="I_role">
+  <data key="d1">has_role</data>
+</edge>
+<edge id="0" source="I" target="A">
+  <data key="d1">has_parent</data>
+</edge>
+<edge id="0" source="L" target="L_name">
+  <data key="d1">has_name</data>
+</edge>
+<edge id="0" source="L" target="L_role">
+  <data key="d1">has_role</data>
+</edge>
+<edge id="0" source="L" target="A">
+  <data key="d1">has_parent</data>
+</edge>
+<edge id="0" source="L" target="C">
+  <data key="d1">click</data>
+</edge>
+<edge id="0" source="L" target="I">
+  <data key="d1">remember</data>
+</edge>
+</graph></graphml>

@@ -1,0 +1,104 @@
+A
+isa	task
+name	PVT
+
+C
+isa 	node
+role  	button
+name  	Acknowledge
+parent	A
+
+E
+isa 	node
+role	box
+name	nil
+parent	A
+
+G
+isa	node
+role	target
+name	nil
+parent	A
+
+I
+isa 	node
+role	letter
+name	nil
+parent	A
+
+J
+isa	edge
+role	isEquivalent
+source	G
+dest	I
+parent 	A
+
+K
+isa	condition
+subj	G
+pred	appear/appearIn/appearOn?
+target	E
+conseq	L,M,N
+parent	A
+#anything to do with "In"?  Pred: appearIn?  have a modifier slot?
+# How to have multiple consequences?
+# This probably isn't the best way to do conditions?
+
+L
+isa	node
+role	subject
+name	nil
+parent	A
+
+M
+isa	edge
+role	click
+source	L
+dest	C
+parent	A
+
+N
+isa	edge
+role	remember
+source	L
+dest	I
+parent	A
+
+[
+O
+isa	condition
+subj	A
+pred	active
+target	nil
+cons	Q
+parent	nil
+# How to deal with property adding? This can't be the best way.  How to deal with parent?
+
+P
+isa	condition
+subj	A
+pred	be
+target	O
+cons	Q
+parent	nil
+]
+# How to deal with multiple conditions with the same consequence?  Should consequences be flagged and have the list of conditions applied
+# to them?
+OR
+[
+O
+isa	condition
+subj	A
+pred	be
+target	active
+cons	Q
+parent	nil
+# I DON'T LIKE THIS BUT MAYBE?
+]
+
+Q
+isa	edge
+role	appear
+source	G
+dest	E
+parent	A
