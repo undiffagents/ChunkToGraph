@@ -1,0 +1,54 @@
+K
+isa	condition
+subj	G
+pred	Y
+target	E
+cons	L,M,N
+parent	A
+
+Y
+Isa	Edge
+Role	Appears
+Source	G
+Dest	E
+Parent	Nil
+State	True/False
+
+
+O
+isa	node
+Role       property
+Name     active
+Parent     nil
+
+Z
+Isa	Edge
+Role	Is
+Source	A
+Dest	O
+Parent	Nil
+State	True/False
+
+P
+isa	condition
+subj	A
+pred	Z
+StateOfPred	True
+target	O
+cons	Q
+parent	nil
+
+SOME GENERAL PRODUCTION THAT CONVERTS THE ABOVE INTO:
+
+derivedProd(
+	If G connected to E via Y and Y is true
+=>
+	Then M (subject clicks button)
+	And N (subject remembers letter)
+)
+
+derivedProd2(
+	If A connected to O via Z and Z is true
+=>
+	Then Q
+)
