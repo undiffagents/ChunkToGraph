@@ -1,0 +1,135 @@
+A
+isa	task
+role	task
+name	PVT
+
+C
+isa 	node
+role  	button
+name  	Acknowledge
+consOf	nil
+parent	A
+
+E
+isa 	node
+role	box
+name	nil
+consOf	nil
+parent	A
+
+G
+isa	node
+role	target
+name	nil
+consOf	nil
+parent	A
+
+I
+isa 	node
+role	letter
+name	nil
+consOf	nil
+parent	A
+
+J
+isa	edge
+role	isEquivalent
+source	G
+dest	I
+state	true
+consOf	nil
+parent 	A
+
+K1
+isa	edge
+role	appear
+source	G
+dest	E
+state	[True|False]
+consOf	nil
+parent	A
+
+K
+isa	condition
+subj	G
+pred	K1
+target	E
+cons	L,M,N
+parent	A
+
+L
+isa	node
+role	subject
+name	nil
+consOf	K
+parent	A
+
+M
+isa	edge
+role	click
+source	L
+dest	C
+state	[True|False]
+consOf	K
+parent	A
+
+N
+isa	edge
+role	remember
+source	L
+dest	I
+state	[True|False]
+consOf	K
+parent	A
+
+O
+isa	node
+role	property
+name	active
+consOf	nil
+parent	nil
+
+P1
+isa	edge
+role	be
+source	A
+dest	O
+state	[True|False]
+consOf	nil
+parent	nil
+
+P
+isa	condition
+subj	A
+pred	P1
+target	O
+cons	Q
+parent	nil
+
+Q
+isa	edge
+role	appear
+source	G
+dest	E
+state	[True|False]
+consOf	P
+parent	A
+
+NOTES:
+1)
+Goal buffer would contain slots for getting the state of an edge. For example:
+When the condition K first comes up, and the state of "appears" is requested
+stateRequestor	K
+stateTarget	K1
+state		nil
+
+K1 gets retrieved and its state gets read and stored into the goal buffer
+stateRequestor 	K
+stateTarget	K1
+state		[True|False]
+
+K gets retrieved again and the processing continues based on the value of state
+
+2)
+There would need to be some way for a production to flip the state of an edge, as well as 
+potentially some trigger for flipping it back (Say after a conditional has fully fired?)
