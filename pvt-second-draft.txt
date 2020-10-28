@@ -8,6 +8,8 @@ isa 	node
 role  	button
 name  	Acknowledge
 consOf	nil
+prevCons nil
+nextCons nil
 parent	A
 
 E
@@ -15,6 +17,8 @@ isa 	node
 role	box
 name	nil
 consOf	nil
+prevCons nil
+nextCons nil
 parent	A
 
 G
@@ -22,6 +26,8 @@ isa	node
 role	target
 name	nil
 consOf	nil
+prevCons nil
+nextCons nil
 parent	A
 
 I
@@ -29,6 +35,8 @@ isa 	node
 role	letter
 name	nil
 consOf	nil
+prevCons nil
+nextCons nil
 parent	A
 
 J
@@ -38,6 +46,8 @@ source	G
 dest	I
 state	true
 consOf	nil
+prevCons nil
+nextCons nil
 parent 	A
 
 K1
@@ -47,14 +57,17 @@ source	G
 dest	E
 state	[True|False]
 consOf	nil
+prevCons nil
+nextCons nil
 parent	A
 
 K
 isa	condition
 subj	G
 pred	K1
+desiredStatePred True
+stateOfCondition [True|False]
 target	E
-cons	L,M,N
 parent	A
 
 L
@@ -62,6 +75,8 @@ isa	node
 role	subject
 name	nil
 consOf	K
+prevCons nil
+nextCons M
 parent	A
 
 M
@@ -71,6 +86,8 @@ source	L
 dest	C
 state	[True|False]
 consOf	K
+prevCons L
+nextCons N
 parent	A
 
 N
@@ -80,6 +97,8 @@ source	L
 dest	I
 state	[True|False]
 consOf	K
+prevCons M
+nextCons nil
 parent	A
 
 O
@@ -87,6 +106,8 @@ isa	node
 role	property
 name	active
 consOf	nil
+prevCons nil
+nextCons nil
 parent	nil
 
 P1
@@ -96,6 +117,8 @@ source	A
 dest	O
 state	[True|False]
 consOf	nil
+prevCons nil
+nextCons nil
 parent	nil
 
 P
@@ -103,6 +126,8 @@ isa	condition
 subj	A
 pred	P1
 target	O
+desiredStatePred True
+condState [True|False]
 cons	Q
 parent	nil
 
@@ -113,6 +138,8 @@ source	G
 dest	E
 state	[True|False]
 consOf	P
+prevCons nil
+nextCons nil
 parent	A
 
 NOTES:
