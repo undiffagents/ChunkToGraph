@@ -1,0 +1,160 @@
+A
+isa	task
+role	task
+name	PVT
+
+C
+isa 	node
+role  	button
+name  	Acknowledge
+consOf	nil
+prevCons nil
+nextCons nil
+parent	A
+
+E
+isa 	node
+role	box
+name	nil
+consOf	nil
+prevCons nil
+nextCons nil
+parent	A
+
+G
+isa	node
+role	target
+name	nil
+consOf	nil
+prevCons nil
+nextCons nil
+parent	A
+
+H
+isa	node
+role	subject
+name	nil
+consOf	nil
+prevCons nil
+nextCons nil
+parent	A
+
+I
+isa 	node
+role	letter
+name	nil
+consOf	nil
+prevCons nil
+nextCons nil
+parent	A
+
+J
+isa	edge
+role	isEquivalent
+source	G
+dest	I
+actionType  nil
+state	True
+consOf	nil
+prevCons nil
+nextCons nil
+parent 	A
+
+K1
+isa	edge
+role	appear
+source	G
+dest	E
+actionType  visual
+state	[True|False]
+consOf	nil
+prevCons nil
+nextCons nil
+parent	A
+
+K
+isa	condition
+pred	K1
+desiredStatePred True
+firstCons  M OR N
+consequenceState True
+processed [True|False]
+parent	A
+
+NOTE: In this example, the subject EITHER clicks OR remembers; in the real scenario, the subject would do both.
+We just do an "OR" here to test that functionality
+
+M
+isa	edge
+role	click
+source	L
+dest	C
+actionType  manual
+state	[True|False]
+consOf	K
+prevCons nil
+nextCons nil
+parent	A
+
+N
+isa	edge
+role	remember
+source	L
+dest	I
+actionType  memory
+state	[True|False]
+consOf	K
+prevCons nil
+nextCons nil
+parent	A
+
+O
+isa	node
+role	property
+name	active
+consOf	nil
+prevCons nil
+nextCons nil
+parent	nil
+
+P1
+isa	edge
+role	be
+source	A
+dest	O
+actionType  nil
+state	[True|False]
+consOf	nil
+prevCons nil
+nextCons nil
+parent	nil
+
+P
+isa	condition
+pred	P1
+desiredStatePred True
+firstCons  K1
+consequenceState True
+processed [True|False]
+parent	nil
+
+
+NOTES:
+1)
+Goal buffer would contain slots for getting the state of an edge. For example:
+When the condition K first comes up, and the state of "appears" is requested
+stateRequestor	K
+stateTarget	K1
+state		nil
+
+K1 gets retrieved and its state gets read and stored into the goal buffer
+stateRequestor 	K
+stateTarget	K1
+state		[True|False]
+
+K gets retrieved again and the processing continues based on the value of state
+
+2)
+There would need to be some way for a production to flip the state of an edge, as well as 
+potentially some trigger for flipping it back (Say after a conditional has fully fired?)
+For example: P is true, which should set K1's state to true, but after the K production has finished processing, K1 should go back to false.
