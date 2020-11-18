@@ -87,7 +87,7 @@ We just do an "OR" here to test that functionality
 M
 isa	edge
 role	click
-source	L
+source	H
 dest	C
 actionType  manual
 state	[True|False]
@@ -99,7 +99,7 @@ parent	A
 N
 isa	edge
 role	remember
-source	L
+source	H
 dest	I
 actionType  memory
 state	[True|False]
