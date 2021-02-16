@@ -1,0 +1,289 @@
+(add-dm 
+
+	(CV1 
+		isa CV_entry 
+		term  is_in 
+		property  containment 
+		SourceTerm  Item 
+		DestTerm  Container 
+		environmentStateType visual 
+		actionType visual ;;?  nil? 
+		;; Maps to action "find the Item in the Container" ;; "appears in", "is in", etc.
+	)
+
+	(CV2 
+		isa CV_entry 
+		term  has_property 
+		property  has ;; ? 
+		SourceTerm  Item 
+		DestTerm  Property 
+		environmentStateType nil ;; ? 
+		actionType  nil 
+		;; "X has property Y", "X is Y", etc.
+	)
+
+	(CV3 
+		isa CV_entry 
+		term  is_of_type 
+		property  type ;; ? 
+		SourceTerm  Item 
+		DestTerm  Type 
+		environmentStateType nil 
+		actionType  nil 
+		;; "X is of type Y', "X is Y", etc.
+	)
+
+	(CV4 
+		isa CV_entry 
+		term  remember 
+		property  memory ;; ? 
+		SourceTerm  Agent ;; ? 
+		DestTerm  Item 
+		environmentStateType nil 
+		actionType memory 
+		;; "X remembers Y', "X knows Y", etc.
+	)
+
+	(CV5 
+		isa CV_entry 
+		term  click 
+		property  press-key ;;? 
+		SourceTerm  Agent ;;? 
+		DestTerm  Item 
+		environmentStateType nil 
+		actionType manual 
+		;; "X clicks Y', "X presses Y", etc.
+	)
+
+	(A 
+		isa task 
+		role task 
+		name PVT
+	)
+
+	(P1 
+		isa edge 
+		CVTerm  has_property 
+		role is_active 
+		source A ;; PVT task 
+		dest O ;; active 
+		consOf nil 
+		prevStep nil 
+		nextStep nil 
+		ifTrue  K1 
+		ifFalse  P1 
+		parent  false ;; should nil
+	)
+
+	(O 
+		isa node 
+		role property 
+		name active ;; applied to task 
+		consOf nil 
+		prevCons nil 
+		nextCons nil 
+		parent nil
+	)
+
+	(G 
+		isa node 
+		role target ;; stimulus 
+		name nil 
+		consOf nil 
+		prevCons nil 
+		nextCons nil 
+		parent A
+	)
+
+	(S1 ;; name states Sx ? 
+		isa state ;; just to not add a bunch of slots to all nodes 
+		describes P1 
+		presence absent ;; [Present|Absent] absent by default because this is a descriptive edge that defaults false 
+		parent nil
+	)
+
+	(cond3 
+		isa edge 
+		role if-present 
+		source S1 
+		dest S4
+	)
+
+	(J 
+		isa edge 
+		role hasType 
+		CVTerm is_of_type
+		source G 
+		dest I 
+		consOf nil 
+		prevStep nil 
+		nextStep nil 
+		ifTrue nil 
+		ifFalse nil 
+		parent A
+	)
+	
+	(S3 ;; name states Sx ? 
+		isa state ;; just to not add a bunch of slots to all nodes 
+		describes J 
+		presence present ;; this edge is always there  
+		parent  A
+	)
+
+	(K1 
+		isa edge 
+		role appear 
+		CVTerm is_in 
+		source G ;;target 
+		dest E ;; box 
+		consOf nil 
+		prevStep nil 
+		nextStep nil 
+		ifTrue  N 
+		ifFalse  K1 
+		parent A 
+		;; from "If X4 appears in X3 ... " 
+		;; Prev/Next = sequencing, True/False = conditional
+	)
+
+	(S4 ;; name states Sx ? 
+		isa state ;; just to not add a bunch of slots to all nodes 
+		describes K1 
+		presence absent  ;; [Present|Absent] absent by default because this is a descriptive edge that defaults false 
+		parent nil
+	)
+
+	(H 
+		isa node 
+		role subject ;;the agent performing task 
+		name nil 
+		consOf nil 
+		prevCons nil 
+		nextCons nil 
+		parent  A
+	)
+
+	(cond1 
+		isa edge 
+		role if-present 
+		source S4 
+		dest S6
+	)
+
+	(I 
+		isa  node 
+		role letter ;; target (property?) 
+		name nil 
+		consOf nil 
+		prevCons nil 
+		nextCons nil 
+		parent  A
+	)
+
+	(E 
+		isa  node 
+		role box ;;; box on screen 
+		name nil 
+		consOf nil 
+		prevCons nil 
+		nextCons nil 
+		parent A
+	)
+
+	(S6 ;; name states Sx ? 
+		isa state ;; just to not add a bunch of slots to all nodes 
+		describes N 
+		presence absent ;; [Present|Absent] absent by default?  How do we want to handle "action" edges? 
+		parent  A
+	)
+
+	(M 
+		isa edge 
+		role click ;; change to press-key 
+		CVTerm click 
+		source H 
+		dest C  ;;verify this is "key" 
+		consOf K1 
+		prevStep N 
+		nextStep nil 
+		ifTrue nil 
+		ifFalse nil 
+		parent A
+	)
+
+	(E2  
+		isa edge 
+		CVTerm  is_in  
+		role isInQuadrant  
+		source E  
+		dest E1 
+		consOf nil  
+		prevStep nil  
+		nextStep nil 
+		ifTrue nil 
+		ifFalse nil  
+		parent A
+	)
+
+	(E1  
+		isa node  
+		role quadrant  
+		name bottom-left  
+		consOf nil  
+		prevCons nil  
+		nextCons nil  
+		parent A
+	)
+
+	(cond2 
+		isa edge 
+		role if-present 
+		source S4 
+		dest S2
+	)
+
+	(N 
+		isa edge 
+		role remember 
+		CVTerm remember 
+		source H 
+		dest I 
+		consOf K1 
+		prevStep nil 
+		nextStep M 
+		ifTrue nil 
+		ifFalse nil 
+		parent A
+	)
+
+	(S2 ;; name states Sx ? 
+		isa state ;; just to not add a bunch of slots to all nodes 
+		describes M 
+		presence absent ;; [Present|Absent] absent by default?  How do we want to handle "action" edges? 
+		parent  A
+	)
+
+	(S5 ;; name states Sx ? 
+		isa state ;; just to not add a bunch of slots to all nodes 
+		describes E2 
+		presence present ;; this edge is always there  
+		parent  A
+	)
+
+	(ord1 
+		isa edge 
+		role ordering 
+		source S6 
+		dest S2
+	)
+
+	(C 
+		isa  node 
+		role   button 
+		name   Acknowledge ;;; button 
+		consOf nil 
+		prevCons nil 
+		nextCons nil 
+		parent  A
+	)
+)

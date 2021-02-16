@@ -50,6 +50,9 @@ def handleNode(chunk: NodeChunk, graph):
     nodeName = chunk.getName()
     nodeRole = chunk.getRole()
     nodeParent = chunk.getParent()
+    nodeConsOf = chunk.getConsof()
+    nodePrevCons = chunk.getPrevcons()
+    nodeNextCons = chunk.getNextcons()
 
     # Add node and its attributes to the graph
     graph.add_node(nodeID, value=nodeID)
@@ -57,6 +60,12 @@ def handleNode(chunk: NodeChunk, graph):
     graph = addRole(graph, nodeID, nodeRole)
     if nodeParent != 'nil':
         graph.add_edge(nodeID, nodeParent, value=CONST_GRAPH_HAS_PARENT_EDGE)
+    if nodeConsOf != 'nil':
+        graph.add_edge(nodeID, nodeConsOf, value=CONST_GRAPH_IS_CONS_OF_EDGE)
+    if nodePrevCons != 'nil':
+        graph.add_edge(nodeID, nodePrevCons, value=CONST_GRAPH_HAS_PREV_CONS_EDGE)
+    if nodeNextCons != 'nil':
+        graph.add_edge(nodeID, nodeNextCons, value=CONST_GRAPH_HAS_NEXT_CONS_EDGE)
 
     # Return updated graph
     return graph
@@ -69,10 +78,17 @@ def handleEdge(chunk: EdgeChunk, graph):
     edgeSource = chunk.getSource()
     edgeDest = chunk.getDest()
     edgeParent = chunk.getParent()
+    edgeEnvStateType = chunk.getEnvironmentstatetype()
+    edgeActionType = chunk.getActiontype()
+    edgeState = chunk.getState()
+    edgeConsOf = chunk.getConsof()
+    edgePrevCons = chunk.getPrevcons()
+    edgeNextCons = chunk.getNextcons()
 
     # We can probably ignore edgeID and edgeParent
     # Add edge to graph
-    graph.add_edge(edgeSource, edgeDest, value=edgeRole)
+    graph.add_edge(edgeSource, edgeDest, role=edgeRole, hasEnvStateType=edgeEnvStateType, hasActionType=edgeActionType,
+                   hasState=edgeState, isConsOf=edgeConsOf, hasPrevCons=edgePrevCons, hasNextCons=edgeNextCons)
 
     # Return updated graph
     return graph

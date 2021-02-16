@@ -53,6 +53,9 @@ class NodeChunk:
         self.role = ""
         self.name = ""
         self.parent = ""
+        self.consOf = ""
+        self.prevCons = ""
+        self.nextCons = ""
         self.ID = ID
 
     def getID(self):
@@ -70,6 +73,24 @@ class NodeChunk:
     def getRole(self):
         return self.role
 
+    def setConsof(self,consOf):
+        self.consOf = consOf
+
+    def getConsof(self):
+        return self.consOf
+
+    def setPrevcons(self,prevCons):
+        self.prevCons = prevCons
+
+    def getPrevcons(self):
+        return self.prevCons
+
+    def setNextcons(self,nextCons):
+        self.nextCons = nextCons
+
+    def getNextcons(self):
+        return self.nextCons
+
     def setParent(self,parent):
         self.parent = parent
 
@@ -77,8 +98,8 @@ class NodeChunk:
         return self.parent
 
     def __str__(self):
-        return "%s\n isa: %s\n name: %s\n role: %s\n parent: %s" % \
-               (self.ID, self.isa, self.name, self.role, self.parent)
+        return "%s\n isa: %s\n name: %s\n role: %s\n consOf: %s\n prevCons: %s\n nextCons: %s\n parent: %s" % \
+               (self.ID, self.isa, self.name, self.role, self.consOf, self.prevCons, self.nextCons, self.parent)
 
 class EdgeChunk:
 
@@ -88,6 +109,12 @@ class EdgeChunk:
         self.role = ""
         self.source = ""
         self.dest = ""
+        self.envStateType = ""
+        self.actionType = ""
+        self.state = ""
+        self.consOf = ""
+        self.prevCons = ""
+        self.nextCons = ""
         self.parent = ""
         self.ID = ID
 
@@ -112,6 +139,42 @@ class EdgeChunk:
     def getDest(self):
         return self.dest
 
+    def setEnvironmentstatetype(self,envStateType):
+        self.envStateType = envStateType
+
+    def getEnvironmentstatetype(self):
+        return self.envStateType
+
+    def setActiontype(self,actionType):
+        self.actionType = actionType
+
+    def getActiontype(self):
+        return self.actionType
+
+    def setState(self,state):
+        self.state = state
+
+    def getState(self):
+        return self.state
+
+    def setConsof(self,consOf):
+        self.consOf = consOf
+
+    def getConsof(self):
+        return self.consOf
+
+    def setPrevcons(self,prevCons):
+        self.prevCons = prevCons
+
+    def getPrevcons(self):
+        return self.prevCons
+
+    def setNextcons(self,nextCons):
+        self.nextCons = nextCons
+
+    def getNextcons(self):
+        return self.nextCons
+
     def setParent(self,parent):
         self.parent = parent
 
@@ -119,29 +182,35 @@ class EdgeChunk:
         return self.parent
 
     def __str__(self):
-        return "%s\n isa: %s\n role: %s\n source: %s\n dest: %s\n parent: %s" % \
-               (self.ID, self.isa, self.role, self.source, self.dest, self.parent)
+        return "%s\n isa: %s\n role: %s\n source: %s\n dest: %s\n environmentStateType: %s\n actionType: %s\n" \
+               "state: %s\n consOf: %s\n prevCons: %s\n nextCons: %s\n parent: %s" % \
+               (self.ID, self.isa, self.role, self.source, self.dest, self.envStateType, self.actionType,
+                self.state, self.consOf, self.prevCons, self.nextCons, self.parent)
 
 class ConditionChunk:
 
     isa = 'condition'
 
     def __init__(self,ID):
-        self.subj = ""
+        #self.subj = ""
         self.pred = ""
-        self.target = ""
-        self.cons = ""
+        #self.target = ""
+        #self.cons = ""
+        self.desiredStatePred = ""
+        self.firstCons = ""
+        self.consequenceState = ""
+        self.processed = ""
         self.parent = ""
         self.ID = ID
 
     def getID(self):
         return self.ID
 
-    def setSubj(self,subj):
-        self.subj = subj
+    #def setSubj(self,subj):
+    #    self.subj = subj
 
-    def getSubj(self):
-        return self.subj
+    #def getSubj(self):
+    #    return self.subj
 
     def setPred(self,pred):
         self.pred = pred
@@ -149,17 +218,41 @@ class ConditionChunk:
     def getPred(self):
         return self.pred
 
-    def setTarget(self,target):
-        self.target = target
+    def setDesiredstatepred(self,desiredStatePred):
+        self.desiredStatePred = desiredStatePred
 
-    def getTarget(self):
-        return self.target
+    def getDesiredstatepred(self):
+        return self.desiredStatePred
 
-    def setCons(self,cons):
-        self.cons = cons
+    def setFirstcons(self,firstCons):
+        self.firstCons = firstCons
 
-    def getCons(self):
-        return self.cons
+    def getFirstcons(self):
+        return self.firstCons
+
+    def setConsequencestate(self,consequenceState):
+        self.consequenceState = consequenceState
+
+    def getConsequencestate(self):
+        return self.consequenceState
+
+    def setProcessed(self,processed):
+        self.processed = processed
+
+    def getProcessed(self):
+        return self.processed
+
+    #def setTarget(self,target):
+    #    self.target = target
+
+    #def getTarget(self):
+    #    return self.target
+
+    #def setCons(self,cons):
+    #    self.cons = cons
+
+    #def getCons(self):
+    #    return self.cons
 
     def setParent(self,parent):
         self.parent = parent
@@ -168,5 +261,7 @@ class ConditionChunk:
         return self.parent
 
     def __str__(self):
-        return "%s\n isa: %s\n subj: %s\n pred: %s\n target: %s\n cons: %s\n parent: %s" % \
-               (self.ID, self.isa, self.subj, self.pred, self.target, self.cons, self.parent)
+        return "%s\n isa: %s\n pred: %s\n desiredStatePred: %s\n firstCons: %s\n " \
+               "consequenceState: %s\n processed: %s\n parent: %s" % \
+               (self.ID, self.isa, self.pred, self.desiredStatePred, self.firstCons, self.consequenceState,
+                self.processed, self.parent)

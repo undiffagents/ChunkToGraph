@@ -3,6 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="52909c4d-f917-4a0b-8a18-af7f2388a62a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ChunkClasses.py" beforeDir="false" afterPath="$PROJECT_DIR$/ChunkClasses.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/Constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GraphGenerator.py" beforeDir="false" afterPath="$PROJECT_DIR$/GraphGenerator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OLD pvt-initial.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OLD pvt-second-draft.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pvt-fifth-draft.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pvt-fourth-draft.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pvt-initial.txt.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/pvt-initial.txt.graphml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pvt-third-draft.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +48,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.scratch">
+  <component name="RunManager" selected="Python.ChunkParsing">
     <configuration name="ChunkParsing" type="PythonConfigurationType" factoryName="Python">
       <module name="ChunkToGraph" />
       <option name="INTERPRETER_OPTIONS" value="" />

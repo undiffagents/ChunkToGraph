@@ -1,3 +1,5 @@
+NEXT REVISION ADDS ENVIRONMENTSTATETYPE TO EDGES, ADDS E1/E2, AND CHANGES J
+
 A
 isa	task
 role	task
@@ -20,6 +22,12 @@ consOf	nil
 prevCons nil
 nextCons nil
 parent	A
+
+E1
+edge 'isInQuadrant'
+
+E2
+node 'bottom left'
 
 G
 isa	node
@@ -50,7 +58,7 @@ parent	A
 
 J
 isa	edge
-role	isEquivalent
+role	isEquivalent   ;;;;;;; isType?
 source	G
 dest	I
 actionType  nil

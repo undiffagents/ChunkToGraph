@@ -1,0 +1,535 @@
+(add-dm 
+
+	(CV1 isa CV_entry 
+	term  is_in 
+	property  containment 
+	SourceTerm  Item 
+	DestTerm  Container 
+	environmentStateType visual 
+	actionType visual ;;?  nil? 
+	;; Maps to action "find the Item in the Container" 
+	;; "appears in", "is in", etc.)
+
+	(CV2 
+	isa CV_entry 
+	term  has_property 
+	property  has ;; ? 
+	SourceTerm  Item 
+	DestTerm  Property 
+	environmentStateType nil ;; ? 
+	actionType  nil 
+	;; "X has property Y", "X is Y", etc.)
+
+	(CV3 
+	isa CV_entry 
+	term  is_of_type 
+	property  type ;; ? 
+	SourceTerm  Item 
+	DestTerm  Type 
+	environmentStateType nil 
+	actionType  nil 
+	;; "X is of type Y', "X is Y", etc.)
+
+	(CV4 
+	isa CV_entry 
+	term  remember 
+	property  memory ;; ? 
+	SourceTerm  Agent ;; ? 
+	DestTerm  Item 
+	environmentStateType nil 
+	actionType memory 
+	;; "X remembers Y', "X knows Y", etc.)
+
+	(CV5 
+	isa CV_entry 
+	term  click 
+	property  press-key ;;? 
+	SourceTerm  Agent ;;? 
+	DestTerm  Item 
+	environmentStateType nil 
+	actionType manual 
+	;; "X clicks Y', "X presses Y", etc.)
+
+	(CV6 
+	isa CV_entry 
+	term has_feature 
+	property has_feature ;;? 
+	SourceTerm Item 
+	DestTerm Item ;;???? 
+	environmentStateType nil 
+	actionType nil 
+	;; "The letter has a color and shape")
+
+	(CV7 
+	isa CV_entry 
+	term search 
+	property search-for ;;? 
+	SourceTerm Item 
+	DestTerm Item 
+	environmentStateType nil 
+	actionType visual 
+	;; "Search for the target"??)
+
+	(CV8 
+	isa CV_entry 
+	term match 
+	property match ;; same? equivalent? is-same-as? 
+	SourceTerm Item 
+	DestTerm Item ;;???? 
+	environmentStateType nil 
+	actionType visual ;;??? 
+	;; "The color of X matches the color of Y")
+
+	(CV9 
+	isa CV_entry 
+	term has_critical_feature 
+	property has_critical_feature ;;? 
+	SourceTerm Item 
+	DestTerm Item ;;???? 
+	environmentStateType nil 
+	actionType nil 
+	;; used to denote features that are critical to matching/searching)
+
+	(CV9 
+	isa CV_entry 
+	term found_in 
+	property found  
+	SourceTerm Item 
+	DestTerm Item ;;???? 
+	environmentStateType nil 
+	actionType visual 
+	;;??? ;; "The target was found in the box")
+	
+	(Y1 
+	isa task 
+	role task 
+	name VST)
+
+	(YE4 
+	isa edge 
+	CVTerm  has_property 
+	role is_active 
+	source Y1 ;; PVT task 
+	dest Y8 ;; active 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue  nil 
+	ifFalse  nil 
+	parent  false ;; should nil)
+
+	(Y8 
+	isa node 
+	role property 
+	name active ;; applied to task 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent nil)
+
+	(YS1 
+	isa state 
+	describes YE4 
+	presence absent  ;; [Present|Absent] absent by default because this is a descriptive edge that defaults false 
+	parent nil)
+
+	(YE5 
+	isa edge 
+	role appear 
+	CVTerm is_in 
+	source Y6 ;;letter 
+	dest Y4 ;; box 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	;;ifTrue  YE6 
+	;;ifFalse  YE5 
+	parent Y1 
+	;; from "If X4 appears in X3 ... " 
+	;; Prev/Next = sequencing, True/False = conditional)
+
+	(YC1 
+	isa edge 
+	role if-present 
+	source YS1 
+	dest YS2 
+	set-to present)
+
+	(YS2 
+	isa state 
+	describes YE5 
+	presence absent  ;; [Present|Absent] absent by default because this is a descriptive edge that defaults false 
+	parent Y1)
+
+	(YC2 
+	isa edge 
+	role if-present 
+	source YS2 
+	dest YS3 
+	set-to present)
+
+	(YS3 
+	isa state 
+	describes YE3 
+	presence absent ;; [Present|Absent] ;; absent by default because this is a descriptive edge that defaults false 
+	parent Y1)
+
+	(YS7 
+	isa state 
+	describes YE7 
+	presence present ;; this edge is always there  
+	parent Y1)
+
+	(Y4 
+	isa  node 
+	role box ;;; box on screen 
+	name nil 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(YE3  
+	isa edge 
+	CVTerm  is_in  
+	role isInBox  
+	source Y6  
+	dest Y4 
+	consOf nil  
+	prevStep nil  
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil  
+	parent Y1)
+
+	(Y6 
+	isa  node 
+	role letter 
+	name nil 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(YE2  
+	isa edge 
+	CVTerm  is_in 
+	role isInQuadrant  
+	source Y4  
+	dest YE1 
+	consOf nil  
+	prevStep nil  
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil  
+	parent Y1)
+
+	(YE1  
+	isa node  
+	role quadrant  
+	name top-left  
+	consOf nil  
+	prevCons nil  
+	nextCons nil  
+	parent nil)
+
+	(YS5 
+	isa state  
+	describes YE2 
+	presence present ;; this edge is always there  
+	parent Y1)
+
+	(YE14 
+	isa edge 
+	role match 
+	CVTerm match 
+	source Y6 
+	dest Y5 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(YS12 
+	isa state 
+	describes YE12 
+	presence present ;; this edge is always there  
+	parent Y1)
+
+	(YS14 
+	isa state 
+	describes YE14 
+	presence nil  ;; [Present|Absent] ;; absent by default because this is a descriptive edge that defaults false 
+	parent Y1)
+
+	(Y10 
+	isa  node 
+	role shape 
+	name nil 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(YE7 
+	isa edge 
+	CVTerm has_feature 
+	role hasShape 
+	source Y6 
+	dest Y10 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(Y9 
+	isa  node 
+	role color 
+	name nil 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(YE6 
+	isa edge 
+	CVTerm has_feature 
+	role hasColor 
+	source Y6 
+	dest Y9 	
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(YS6 
+	isa state 
+	describes YE6 
+	presence present ;; this edge is always there  
+	parent Y1)
+
+	(YC3 
+	isa edge 
+	role if-present 
+	source YS3 
+	dest YS8 
+	set-to present)
+
+	(YS8 
+	isa state 
+	describes YE8 
+	presence absent  ;; [Present|Absent] ;; absent by default because this is a descriptive edge that defaults false 
+	parent Y1)
+
+
+	(YE8 
+	isa edge 
+	role search 
+	CVTerm search 
+	source Y7 
+	dest Y5 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(Y7 
+	isa node 
+	role subject ;;the agent performing task 
+	name nil 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(Y12 
+	isa  node 
+	role shape 
+	name nil 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(YE12 
+	isa edge 
+	CVTerm has_feature 
+	role hasShape 
+	source Y5 
+	dest Y12 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(Y5 
+	isa node 
+	role target ;; stimulus 
+	name nil 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(Y11 
+	isa  node 
+	role color 
+	name nil 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(YE13 
+	isa edge 
+	CVTerm has_feature 
+	role hasColor 
+	source Y5 
+	dest Y11 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(YC7 
+	isa edge 
+	role if-present 
+	source YS14 
+	dest YS9 
+	set-to present)
+
+	(YC8 
+	isa edge 
+	role if-absent 
+	source YS14 
+	dest YS9 
+	set-to absent)
+
+	(YS13 
+	isa state 
+	describes YE13 
+	presence present ;; this edge is always there  
+	parent Y1)
+
+	(YS10 
+	isa state 
+	describes YE10 
+	presence nil ;; ???? [Present|Absent] ;; absent by default because this is a descriptive edge that defaults false 
+	parent Y1)
+
+	(YC5 
+	isa edge 
+	role if-present 
+	source YS9 
+	dest YS10 
+	set-to present)
+
+	(YS9 
+	isa state 
+	describes YE9 
+	presence nil ;; [Present|Absent] ;; nil by default because this is a descriptive edge that defaults false 
+	;; waiting-on search-state 
+	;; waiting-on-state done 
+	parent Y1)
+
+	(Y2 
+	isa node 
+	role button 
+	name Present 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(YE10 
+	isa edge 
+	role click 
+	CVTerm click 
+	source Y5 
+	dest Y2 
+	consOf nil 
+	prevStep nil 
+	nextStepnil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(YS11 
+	isa state 
+	describes YE11 
+	presence nil ;; ???? [Present|Absent] ;; absent by default because this is a descriptive edge that defaults false 
+	parent Y1)
+
+	(YC6 
+	isa edge 
+	role if-absent 
+	source YS9 
+	dest YS11 
+	set-to present)
+
+	(YE11 
+	isa edge 
+	role click 
+	CVTerm click 
+	source Y5 
+	dest Y3 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(Y3 
+	isa node 
+	role button 
+	name Absent 
+	consOf nil 
+	prevCons nil 
+	nextCons nil 
+	parent Y1)
+
+	(YE41 
+	isa edge 
+	CVTerm is_of_type 
+	role hasType 
+	source Y5 
+	dest Y6 
+	consOf nil 
+	prevStep nil 
+	nextStep nil 
+	ifTrue nil 
+	ifFalse nil 
+	parent Y1)
+
+	(YE9  
+	isa edge 
+	CVTerm  is_in  
+	role isInBox  
+	source Y5  
+	dest Y4 
+	consOf nil  
+	prevStep nil  
+	nextStep nil 	
+	ifTrue nil 
+	ifFalse nil  
+	parent Y1)
+
+	(YS4 
+	isa state 
+	describes YE41 
+	presence present ;; this edge is always there  
+	parent Y1)
+)

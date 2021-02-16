@@ -1,0 +1,201 @@
+(add-dm
+    
+    (goal1 isa goal subtask start phase start)
+    ;; (goal1 isa goal subtask pvt phase start)
+    
+    (A
+        isa	task
+        role	task
+        name	PVT)
+    
+    (C
+        isa 	node   ;;;the object, i.e. the button
+        role  	button
+        name  	Acknowledge ;;; this indicates that whatever button is here is the "acknowledge" button, whatever that is
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent	 A)
+    
+    (E
+        isa 	node
+        role	box ;;; box on screen; may be able to ignore box
+        name	nil  ;;
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent A) ;; this grounds it in the task, in the task environment...
+        
+        ;;could have a set of nodes that are x/y coordinates with a relationship to the box
+        	;; eg E has relationship to node NODE containing coordinates
+        	;; connected by an edge
+        	
+        	;;perhaps: box doesn't matter?
+        	;; nope, coordinates are important/distinguishing feature
+        	
+        	;;idea 1) attention goes to box, coordinates are saved and associated with PVT box
+        		;;the box is not what is changing, just the content
+        	;;idea 2) visual search
+        	;;idea 3) take from instructions--understanding of quadrants
+        		;; ACT-R tutorial about visual "bottom left"/"top right" distinctions
+   
+    (E1    
+	isa     node
+	role	quadrant
+	name	bottom-left
+	consOf	nil
+	prevCons nil
+	nextCons nil
+	parent	A)
+
+    (E2
+	isa	edge
+	role	isInQuadrant
+	source	E
+	dest	E1
+	environmentStateType visual ;;;;; putting this here but I'm not sure the environment state type matters for this one since it's static?
+	actionType  nil
+	state	True
+	consOf	nil
+	prevCons nil
+	nextCons nil
+	parent	A)
+
+    (G
+        isa	node
+        role	target ;; stimulus
+        name	nil
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent A)
+    
+    (H
+        isa	node
+        role	subject ;;the agent performing task 
+        name	nil
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent	 A)
+    
+    (I
+        isa 	node
+        role	letter ;; target (property?)
+        name	nil
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent	 A)
+    
+    (J
+        isa	edge
+        role	hasType ;;formerly isEquivalent, changed 1/5/21
+        source	G
+        dest	I
+	environmentStateType nil
+        actionType  nil
+        state	True
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent A)
+    
+    (K1
+        isa	edge
+        role	appear      
+        source	G ;;target
+        dest	E ;; box
+	environmentStateType visual
+        actionType  nil      ;;;;;;; mdf to think about slot name; environment state type? ;;;; dps changes to nil on enviroType addition 1/5/21
+        ;; want to update the state based on the visual state/contents of visual buffer
+        ;; visual buffer has stimulus for short time, action has to happen while true
+        ;; ORRRRRR (future thought for MDF) memory of seeing stimulus is created, with acknowledge
+        state	false ;; [True|False]
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent A)
+    
+    (K
+        isa	condition
+        pred	K1
+        desiredStatePred True
+        firstCons N ;; M OR N    ;;; disregard or, always make M for now. Could be random, or some other state True
+        consequenceState True
+        processed false ;; [True|False]
+        parent	 A)
+    
+    ;;NOTE: In this example, the subject EITHER clicks OR remembers; in the real scenario, the subject would do both.
+    ;;We just do an "OR" here to test that functionality
+    
+    (M
+        isa	edge
+        role	click ;; change to press-key
+        source	H
+        dest	C  ;;verify this is "key", meaning the key to press
+	environmentStateType nil
+        actionType  manual
+        ;; use actionType slot name to indicate an action, not a state
+        state	false ;;[True|False] 
+        ;; state would be changed to true if K1 is true? then action occurs, then set back to false?
+        ;; MDF to think about how action would happen, chunk change back and forth in state?
+        consOf	K
+        prevCons N
+        nextCons nil ;;; this sets up the cascade from K to M to N
+        parent A)
+        
+        
+ ;;    +manual>
+ ;;       isa press-key
+ ;;       key space       
+    
+    (N
+        isa	edge
+        role	remember
+        source	H
+        dest	I
+	environmentStateType nil
+        actionType  memory
+        state	false ;;[True|False]
+        consOf	K
+        prevCons nil
+        nextCons M
+        parent A
+    )
+    
+    (O
+        isa	node
+        role	property
+        name	active ;; applied to task
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent nil
+    )
+    
+    (P1
+        isa	edge
+        role	be
+        source	A ;; PVT task
+        dest	O ;; active 
+	environmentStateType nil
+        actionType  nil
+        state	true ;; [True|False]
+        consOf	nil
+        prevCons nil
+        nextCons nil
+        parent	 false ;; should nil
+    )
+    
+(P
+        isa	condition
+        pred	P1
+        desiredStatePred True ;; would a chunk like this ever have a slot named "state"? could we use "state" to be true?
+        firstCons  K1
+        consequenceState True
+        processed false ;; [True|False]
+        parent false
+)
+        
+)

@@ -1,6 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key attr.name="value" attr.type="string" for="edge" id="d1"/>
-<key attr.name="value" attr.type="string" for="node" id="d0"/>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="edge" attr.name="hasNextCons" attr.type="string"/>
+<key id="d6" for="edge" attr.name="hasPrevCons" attr.type="string"/>
+<key id="d5" for="edge" attr.name="isConsOf" attr.type="string"/>
+<key id="d4" for="edge" attr.name="hasState" attr.type="string"/>
+<key id="d3" for="edge" attr.name="hasActionType" attr.type="string"/>
+<key id="d2" for="edge" attr.name="hasEnvStateType" attr.type="string"/>
+<key id="d1" for="edge" attr.name="value" attr.type="string"/>
+<key id="d0" for="node" attr.name="value" attr.type="string"/>
 <graph edgedefault="directed"><node id="A">
   <data key="d0">A</data>
 </node>
@@ -28,6 +34,15 @@
 <node id="E_role">
   <data key="d0">box</data>
 </node>
+<node id="E1">
+  <data key="d0">E1</data>
+</node>
+<node id="E1_name">
+  <data key="d0">bottom-left</data>
+</node>
+<node id="E1_role">
+  <data key="d0">quadrant</data>
+</node>
 <node id="G">
   <data key="d0">G</data>
 </node>
@@ -36,6 +51,15 @@
 </node>
 <node id="G_role">
   <data key="d0">target</data>
+</node>
+<node id="H">
+  <data key="d0">H</data>
+</node>
+<node id="H_name">
+  <data key="d0">nil</data>
+</node>
+<node id="H_role">
+  <data key="d0">subject</data>
 </node>
 <node id="I">
   <data key="d0">I</data>
@@ -46,73 +70,133 @@
 <node id="I_role">
   <data key="d0">letter</data>
 </node>
-<node id="L">
-  <data key="d0">L</data>
+<node id="O">
+  <data key="d0">O</data>
 </node>
-<node id="L_name">
-  <data key="d0">nil</data>
+<node id="O_name">
+  <data key="d0">active</data>
 </node>
-<node id="L_role">
-  <data key="d0">subject</data>
+<node id="O_role">
+  <data key="d0">property</data>
 </node>
-<edge id="0" source="A" target="A_name">
+<edge source="A" target="A_name" id="0">
   <data key="d1">has_name</data>
 </edge>
-<edge id="0" source="A" target="A_role">
+<edge source="A" target="A_role" id="0">
   <data key="d1">has_role</data>
 </edge>
-<edge id="0" source="C" target="C_name">
+<edge source="A" target="O" id="0">
+  <data key="d1">be</data>
+  <data key="d2">nil</data>
+  <data key="d3">nil</data>
+  <data key="d4">true</data>
+  <data key="d5">nil</data>
+  <data key="d6">nil</data>
+  <data key="d7">nil</data>
+</edge>
+<edge source="C" target="C_name" id="0">
   <data key="d1">has_name</data>
 </edge>
-<edge id="0" source="C" target="C_role">
+<edge source="C" target="C_role" id="0">
   <data key="d1">has_role</data>
 </edge>
-<edge id="0" source="C" target="A">
+<edge source="C" target="A" id="0">
   <data key="d1">has_parent</data>
 </edge>
-<edge id="0" source="E" target="E_name">
+<edge source="E" target="E_name" id="0">
   <data key="d1">has_name</data>
 </edge>
-<edge id="0" source="E" target="E_role">
+<edge source="E" target="E_role" id="0">
   <data key="d1">has_role</data>
 </edge>
-<edge id="0" source="E" target="A">
+<edge source="E" target="A" id="0">
   <data key="d1">has_parent</data>
 </edge>
-<edge id="0" source="G" target="G_name">
+<edge source="E" target="E1" id="0">
+  <data key="d1">isInQuadrant</data>
+  <data key="d2">visual</data>
+  <data key="d3">nil</data>
+  <data key="d4">True</data>
+  <data key="d5">nil</data>
+  <data key="d6">nil</data>
+  <data key="d7">nil</data>
+</edge>
+<edge source="E1" target="E1_name" id="0">
   <data key="d1">has_name</data>
 </edge>
-<edge id="0" source="G" target="G_role">
+<edge source="E1" target="E1_role" id="0">
   <data key="d1">has_role</data>
 </edge>
-<edge id="0" source="G" target="A">
+<edge source="E1" target="A" id="0">
   <data key="d1">has_parent</data>
 </edge>
-<edge id="0" source="G" target="I">
-  <data key="d1">isEquivalent</data>
-</edge>
-<edge id="0" source="I" target="I_name">
+<edge source="G" target="G_name" id="0">
   <data key="d1">has_name</data>
 </edge>
-<edge id="0" source="I" target="I_role">
+<edge source="G" target="G_role" id="0">
   <data key="d1">has_role</data>
 </edge>
-<edge id="0" source="I" target="A">
+<edge source="G" target="A" id="0">
   <data key="d1">has_parent</data>
 </edge>
-<edge id="0" source="L" target="L_name">
+<edge source="G" target="I" id="0">
+  <data key="d1">hasType</data>
+  <data key="d2">nil</data>
+  <data key="d3">nil</data>
+  <data key="d4">True</data>
+  <data key="d5">nil</data>
+  <data key="d6">nil</data>
+  <data key="d7">nil</data>
+</edge>
+<edge source="G" target="E" id="0">
+  <data key="d1">appear</data>
+  <data key="d2">visual</data>
+  <data key="d3">nil</data>
+  <data key="d4">false</data>
+  <data key="d5">nil</data>
+  <data key="d6">nil</data>
+  <data key="d7">nil</data>
+</edge>
+<edge source="H" target="H_name" id="0">
   <data key="d1">has_name</data>
 </edge>
-<edge id="0" source="L" target="L_role">
+<edge source="H" target="H_role" id="0">
   <data key="d1">has_role</data>
 </edge>
-<edge id="0" source="L" target="A">
+<edge source="H" target="A" id="0">
   <data key="d1">has_parent</data>
 </edge>
-<edge id="0" source="L" target="C">
+<edge source="H" target="C" id="0">
   <data key="d1">click</data>
+  <data key="d2">nil</data>
+  <data key="d3">manual</data>
+  <data key="d4">false</data>
+  <data key="d5">K</data>
+  <data key="d6">N</data>
+  <data key="d7">nil</data>
 </edge>
-<edge id="0" source="L" target="I">
+<edge source="H" target="I" id="0">
   <data key="d1">remember</data>
+  <data key="d2">nil</data>
+  <data key="d3">memory</data>
+  <data key="d4">false</data>
+  <data key="d5">K</data>
+  <data key="d6">nil</data>
+  <data key="d7">M</data>
+</edge>
+<edge source="I" target="I_name" id="0">
+  <data key="d1">has_name</data>
+</edge>
+<edge source="I" target="I_role" id="0">
+  <data key="d1">has_role</data>
+</edge>
+<edge source="I" target="A" id="0">
+  <data key="d1">has_parent</data>
+</edge>
+<edge source="O" target="O_name" id="0">
+  <data key="d1">has_name</data>
+</edge>
+<edge source="O" target="O_role" id="0">
+  <data key="d1">has_role</data>
 </edge>
 </graph></graphml>

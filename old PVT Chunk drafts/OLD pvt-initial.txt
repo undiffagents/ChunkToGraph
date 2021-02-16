@@ -1,0 +1,86 @@
+A
+isa	task
+role	task
+name	PVT
+
+C
+isa 	node
+role  	button
+name  	Acknowledge
+parent	A
+
+E
+isa 	node
+role	box
+name	nil
+parent	A
+
+G
+isa	node
+role	target
+name	nil
+parent	A
+
+I
+isa 	node
+role	letter
+name	nil
+parent	A
+
+J
+isa	edge
+role	isEquivalent
+source	G
+dest	I
+parent 	A
+
+K
+isa	condition
+subj	G
+pred	appear
+target	E
+cons	L,M,N
+parent	A
+
+L
+isa	node
+role	subject
+name	nil
+parent	A
+
+M
+isa	edge
+role	click
+source	L
+dest	C
+parent	A
+
+N
+isa	edge
+role	remember
+source	L
+dest	I
+parent	A
+
+O
+isa	condition
+subj	A
+pred	active
+target	nil
+cons	Q
+parent	nil
+
+P
+isa	condition
+subj	A
+pred	be
+target	O
+cons	Q
+parent	nil
+
+Q
+isa	edge
+role	appear
+source	G
+dest	E
+parent	A
